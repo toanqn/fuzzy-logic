@@ -88,7 +88,7 @@ class Car(pygame.sprite.Sprite):
 
     def deaccelerate(self):
         if self.speed > self.minspeed:
-            self.speed > self.speed - self.deacceleration
+            self.speed = self.speed - self.deacceleration
 
     def steerleft(self):
         self.dir = self.dir + self.steering
