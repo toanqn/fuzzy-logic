@@ -18,21 +18,20 @@ def lamp_less_red_dependency(time):
     return 0.0
 
 
-time1 = np.arange(0., 6., 0.1)
-time2 = np.arange(3., 20., 0.1)
+time_range = np.arange(0., 20., 0.1)
 
-less_red = [lamp_less_red_dependency(tmp) for tmp in time1]
-red = [lamp_red_dependency(tmp) for tmp in time2]
+less_red = [lamp_less_red_dependency(tmp) for tmp in time_range]
+red = [lamp_red_dependency(tmp) for tmp in time_range]
 
 # red dashes, blue squares and green triangles
 
-plt.xlabel("Time Red Lamp")
-plt.ylabel("Dependency")
+plt.xlabel("Thời gian đèn đỏ còn lại (s)")
+plt.ylabel("Độ thuộc")
 
-plt.title("Red dependency")
+plt.title("Hàm thuộc đèn đỏ")
 
 plt.text(1, 1.0, "less red")
 plt.text(9, 1.0, "red")
 
-plt.plot(time1, less_red, time2, red)
+plt.plot(time_range, less_red, time_range, red)
 plt.show()

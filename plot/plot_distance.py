@@ -5,48 +5,54 @@ import numpy as np
 # distance dependency
 # distance dependency
 def distance_near_dependency(distance):
+    dependency = 0.0
     if 0 <= distance <= 70:
-        return 1.0
+        dependency = 1.0
     if 70 < distance < 140:
-        return (140 - distance) / 70.0
-    return 0.0
+        dependency = (140 - distance) / 70.0
+    return 0.0 if dependency < 0 else dependency
 
 
 def distance_medium_dependency(distance):
-    if 70 <= distance <= 140:
-        return (distance - 70) / 70.0
-    if 140 <= distance <= 210:
-        return (210 - distance) / 70.0
-    return 0.0
+    dependency = 0.0
+    if 70 <= distance < 130:
+        dependency = (distance - 70) / 60.0
+    if 130 <= distance <= 150:
+        dependency = 1.0
+    if 150 < distance <= 210:
+        dependency = (210 - distance) / 60.0
+    return 0.0 if dependency < 0 else dependency
 
 
 def distance_far_dependency(distance):
+    dependency = 0.0
     if 140 <= distance <= 210:
-        return (distance - 140) / 70.0
+        dependency = (distance - 140) / 70.0
     if distance >= 210:
-        return 1.0
-    return 0.0
+        dependency = 1.0
+    return 0.0 if dependency < 0 else dependency
 
 
 # evenly sampled time at 200ms intervals
-distance1 = np.arange(0., 140., 0.2)
-distance2 = np.arange(70., 210., 0.2)
-distance3 = np.arange(140., 280., 0.2)
+distance_range = np.arange(0., 280., 0.2)
 
-near = [distance_near_dependency(tmp) for tmp in distance1]
-medium = [distance_medium_dependency(tmp) for tmp in distance2]
-far = [distance_far_dependency(tmp) for tmp in distance3]
+near = [distance_near_dependency(tmp) for tmp in distance_range]
+medium = [distance_medium_dependency(tmp) for tmp in distance_range]
+far = [distance_far_dependency(tmp) for tmp in distance_range]
 
 # red dashes, blue squares and green triangles
 
-plt.xlabel("Distance")
-plt.ylabel("Dependency")
+plt.xlabel("Khoảng cách (pixel)")
+plt.ylabel("Độ thuộc")
 
-plt.title("Distance dependency")
+plt.title("Hàm thuộc khoảng cách")
 
 plt.text(40, 1.0, "near")
 plt.text(120, 1.0, "medium")
 plt.text(230, 1.0, "far")
 
-plt.plot(distance1, near, distance2, medium, distance3, far)
+plt.plot(distance_range, near, distance_range, medium, distance_range, far)
 plt.show()
+
+x = 200
+print(distance_near_dependency(x), distance_medium_dependency(x), distance_far_dependency(x))

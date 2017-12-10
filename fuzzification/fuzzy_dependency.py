@@ -29,10 +29,12 @@ def distance_near_dependency(distance):
 
 
 def distance_medium_dependency(distance):
-    if 70 <= distance <= 140:
-        return (distance - 70) / 70.0
-    if 140 <= distance <= 210:
-        return (210 - distance) / 70.0
+    if 70 <= distance < 130:
+        return (distance - 70) / 60.0
+    if 130 <= distance <= 150:
+        return 1.0
+    if 150 < distance <= 210:
+        return (210 - distance) / 60.0
     return 0.0
 
 
@@ -54,10 +56,12 @@ def angle_small_dependency(angle):
 
 
 def angle_medium_dependency(angle):
-    if 7 <= angle <= 14:
-        return (angle - 7) / 7.0
-    if 14 <= angle <= 21:
-        return (21 - angle) / 7.0
+    if 7 <= angle < 12:
+        return (angle - 7) / 5.0
+    if 12 <= angle <= 16:
+        return 1.0
+    if 16 < angle <= 21:
+        return (21 - angle) / 5.0
     return 0.0
 
 
