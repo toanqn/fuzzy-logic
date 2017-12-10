@@ -17,8 +17,11 @@ class ImpedimentDeductive:
     def cal_function_arguments(self, distance_dependency, angle_dependency):
         for rule in self.rules:
             if distance_dependency[0] == rule[0] and angle_dependency[0] == rule[1]:
-                dependencies = [distance_dependency[1], angle_dependency[1]]
-                min_arg = min(dependencies)
+                # dependencies = [distance_dependency[1], angle_dependency[1]]
+                # min_arg = min(dependencies)
+                a, b = distance_dependency[1], angle_dependency[1]
+                min_arg = max([1-a, min([a, b])])
+
                 label = rule[2]
                 new_arguments = []
                 if label == "Fast":
